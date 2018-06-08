@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>{% block title %}{% endblock %} - Flaskr</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB" crossorigin="anonymous">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css')}}">
+
+</head>
+<body class="container">
+
+    <nav class="navbar justify-content-conter">
+        <h1 class="nav-brand">Flaskr</h1>
+        <ul class="nav justify-content-conter">
+            {% if g.user %}
+                <li class="nav-item"><span class="nav-link">{{ g.user['username'].title() }}</span></li>
+                <li class="nav-item"><a href="{{ url_for('auth.logout') }}" class="nav-link">Log Out</a></li>
+            {% else %}
+                <li class="nav-item"><a href="{{ url_for('auth.login') }}" class="nav-link">Log In</a></li>
+                <li class="nav-item"><a href="{{ url_for('auth.register')}}" class="nav-link">Register</a></li>
+            {% endif %}
+        </ul>
+    </nav>
+    <section class="content">
+        <header>
+            {% block header%}首页{% endblock %}
+        </header>
+        {% for message in get_flashed_messages() %}
+            <div class="flash">{{ message }}</div>
+        {% endfor %}
+        {% block content %}{% endblock %}
+    </section>
+</body>
+</html>

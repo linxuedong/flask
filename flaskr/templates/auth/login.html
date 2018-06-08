@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+
+{% block header %}
+<h1>{% block title %}登录{% endblock %}</h1>
+{% endblock %}
+
+{% block content %}
+  <form method="post" class="form-group">
+    <label for="username">Username</label>
+    <input name="username" class="form-control" id="username" required>
+    <label for="password">Password</label>
+    <input type="password" name="password" class="form-control" id="password" required>
+    <input type="submit" class="btn btn-primary" value="Login">
+  </form>
+{% endblock %}
