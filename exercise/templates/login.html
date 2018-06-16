@@ -7,9 +7,11 @@
   <body>
     <form class="" action="" method="post">
       <label for="username">Username:</label>
-      <input type="text" name="username" value="">
-      <!-- <label for="password">Password:</label>
-      <input type="password" name="password" value=""> -->
+      <input type="text" name="username" value="{{request.form['username']}}">
+      <div class="">
+        <label for="signature">Signature:</label>
+        <textarea type="text" name="signature" value="" rows=8></textarea>        
+      </div>
       <input type="submit" name="submit" value="Submit">
     </form>
   </body>

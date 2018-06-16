@@ -44,8 +44,29 @@ def about():
 ## HTTP Methods
 > By default, a route only answers to `GET` requests. You can use the `methods` argument of the `route()` decorator to handle different HTTP methods.
 
-## Template:
+# Template:
+
 > Flask will look for templates in the `templates` folder.  
 
+在模版中默认可以用的全局变量：
+- config
+- request
+- session
+- g
+- get_flashed_messages()
+- url_for()
 
-> Inside templates you also have access to the request, session and g [1] objects as well as the get_flashed_messages() function.
+## Controlling Autoescaping (控制自动转义)
+由于一些特殊字符如 `&` `>` `<` `"` `'` 在 HTML(XML 或 XHTML) 中都存特殊含义，在文本中使用应该转为特定 `entities`。
+不这么做不仅会导致用户疲于在文本中使用这些字符，也会导致安全问题。
+解决方案：
+1. 使用 Markuo
+2. 使用 `|safe` filter
+3. 临时禁用自动转义系统 `{% autoescape %}`
+
+```html
+{% autoescape false %}
+    <p>autoescaping is disabled here
+    <p>{{ will_not_be_escaped }}
+{% endautoescape %}
+```

@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Index</title>
+  </head>
+  <body>
+    <p>Logged in as {{ session.username }}</p>
+
+    <h1>Template</h1>
+    <p>username: {{ session.username }}</p>
+    <p>Signature: {{ session.signature }}</p>
+
+    <div>
+      <h2>临时禁用自动转义</h2>
+      {% autoescape false %}
+        <p>autoescaping is disabled here:</p>
+        <p>{{ session.signature }}</p>
+      {% endautoescape%}
+      <h2>使用 filter：</h2>
+      <p> {{ session.signature|string_cut }}</p>
+    </div>
+    {{ format_price(0.33) }}
+
+
+    <script type="text/javascript">
+      console.log({{ session.username|tojson|safe }})
+    </script>
+  </body>
+</html>
