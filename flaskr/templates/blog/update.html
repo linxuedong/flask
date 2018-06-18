@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+
+{% block header %}
+<h1>{% block title %}修改博客{% endblock %}</h1>
+{% endblock %}
+
+{% block content %}
+  <form method="post" class="form-group">
+    <label for="title">标题：</label>
+    <input name="title" class="form-control" id="title" value="{{ post.title }}" required>
+    <label for="body">内容：</label>
+    <textarea name="body" rows="8" cols="80" class="form-control" value="{{ post.body }}">{{ post.body }}</textarea>
+    <input type="submit" class="btn btn-primary" value="修改">
+  </form>
+
+  {{ post.author_id }}
+{% endblock %}

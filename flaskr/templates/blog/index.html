@@ -6,6 +6,8 @@
 
 {% block content %}
 {% for post in posts %}
-title： {{ posts.title }}
+<h3>title： {{ post.title }}</h3>
+<p>body: {{ post.body }}</p>
+<p>author: {{ post.author_id }}</p>
 {% endfor %}
 {% endblock %}
