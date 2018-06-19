@@ -43,6 +43,7 @@ def hello():
 
 @app.route('/hello/<string:name>')
 def show_user(name):
+    # Manually Push a Context
     format = request.args.get('format')
     return 'Hello {} !'.format(format)
 
