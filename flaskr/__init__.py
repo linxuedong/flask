@@ -47,4 +47,8 @@ def create_app(test_config=None):
     app.register_blueprint(blog.bp)
     app.add_url_rule('/', endpoint='index')
 
+    with app.app_context():
+        db.init_db()
+        print('make some change')
+
     return app
