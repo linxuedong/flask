@@ -54,15 +54,19 @@ def create_app(test_config=None):
     return app
 
 
-def get_db():
-    if 'db' not in g:
-        g.db = connect_to_database()
+def get_post():
+    if 'posts' not in g:
+        db = get_db()
+        posts = db.execute(
+            "SELECT * FROM post"
+        ).fetchall()
+        g.posts = posts
 
-    return g.db
+    return g.posts
 
 @app.teardown_appcontext
-def teardown_db():
-    db = g.pop('db', None)
+def teardown_post():
+    db = g.pop('posts', None)
 
     if db is not None:
         db.close()
