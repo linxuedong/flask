@@ -1,6 +1,8 @@
 from flask import Flask, url_for, request, render_template, abort, make_response
 from flask import render_template_string, session, redirect, g
 from werkzeug.utils import secure_filename
+from werkzeug.wrappers import BaseRequest
+from werkzeug.exceptions import HTTPException, NotFound
 
 app = Flask(__name__)
 app.secret_key = b'hello'
@@ -55,9 +57,15 @@ def show_subpath(subpath):
         abort(404)
     return 'Subpath is: %s.' %subpath
 
-@app.errorhandler(404)
+@app.errorhandler(NotFound)
 def page_not_found(error):
     return "<h1>页面不存在</h1>", 404
+
+def handle_bad_request(e):
+    return "Bad Request", 400
+
+app.register_error_handler(400, handle_bad_request)
+
 
 @app.route('/upload', methods=['GET', 'POST'])
 def upload_file():
