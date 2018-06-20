@@ -11,3 +11,8 @@ def show(page):
         return render_template('%s.html' % page)
     except TemplateNotFound:
         abort(404)
+
+
+@simple_page.errorhandler(404)
+def error_handler(ex):
+    return "页面不存在"
