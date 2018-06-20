@@ -43,7 +43,9 @@ def hello():
 
 @app.route('/hello/<string:name>')
 def show_user(name):
-    return 'Hello {} !'.format(name)
+    # Manually Push a Context
+    format = request.args.get('format')
+    return 'Hello {} !'.format(format)
 
 
 @app.route('/post/<int:post_id>')
@@ -97,3 +99,7 @@ def utility_processor():
     def format_price(amount, currency=u'€'):
         return u'{0:.2f}{1}'.format(amount, currency)
     return dict(format_price=format_price)
+
+
+with app.test_request_context('/hello/tom', data={'format':'short'}):
+    show_user('tom')

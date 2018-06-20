@@ -3,7 +3,7 @@ import tempfile
 from flask import url_for
 
 import pytest
-from ..exercise import hello
+from exercise import hello
 
 @pytest.fixture
 def client():

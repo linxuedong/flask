@@ -47,4 +47,26 @@ def create_app(test_config=None):
     app.register_blueprint(blog.bp)
     app.add_url_rule('/', endpoint='index')
 
+    with app.app_context():
+        db.init_db()
+        print('make some change')
+
     return app
+
+
+def get_post():
+    if 'posts' not in g:
+        db = get_db()
+        posts = db.execute(
+            "SELECT * FROM post"
+        ).fetchall()
+        g.posts = posts
+
+    return g.posts
+
+@app.teardown_appcontext
+def teardown_post():
+    db = g.pop('posts', None)
+
+    if db is not None:
+        db.close()

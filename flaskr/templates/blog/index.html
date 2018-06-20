@@ -10,4 +10,11 @@
 <p>body: {{ post.body }}</p>
 <p>author: {{ post.author_id }}</p>
 {% endfor %}
+
+{% for blog in g.blogs %}
+blog:{{blog.title}}
+{% endfor %}
+
+{{ g.blogs }}
+
 {% endblock %}
