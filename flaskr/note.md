@@ -16,8 +16,11 @@ Application context 或 CLI command 是放置常用 data 的好地方
 
 # The Request Context
 
-## 生命周期
+## Lifetiem of the Context
 当 Flask 处理一个 request ，request context 开始，同时 开始一个 application context。
 当 request 结束，request context 结束，然后结束 application context.  
 
 context 对于每一个thread(线程)都是唯一的，不能传输给其他线程，其他线程有不同的 context。  
+
+## Callbacks and Errors
+1. 在每个 request 之前， before_request() 被调用。如果这个函数有返回值，将会跳过 view function。
