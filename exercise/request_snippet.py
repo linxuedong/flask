@@ -11,7 +11,6 @@ def before_request():
 
 
 @app.route('/request/hello')
-@login_in
 def hello():
     print('during view')
     return 'hello world'
